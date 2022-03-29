@@ -16,7 +16,7 @@ import { UsersService } from './users/users.service';
     }),
     UsersModule],
   controllers: [AppController],
-  providers: [AppService, UsersResolver, UsersService],
+  providers: [AppService],
 })
 
 
