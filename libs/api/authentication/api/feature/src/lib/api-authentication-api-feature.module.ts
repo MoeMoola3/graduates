@@ -15,7 +15,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
     }),
     UsersModule],
   controllers: [AppController],
-  providers: [AppService, UsersResolver],
+  providers: [AppService],
 })
 
 
