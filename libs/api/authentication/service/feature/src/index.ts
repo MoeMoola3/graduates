@@ -1,1 +1,1 @@
-export * from './lib/api-authentication-service-feature.module';
+export * from '../../../api/feature/src/lib/api-authentication-api.service'
