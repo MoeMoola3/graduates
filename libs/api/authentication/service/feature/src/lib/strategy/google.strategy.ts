@@ -18,12 +18,12 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google'){
         super(cred);
     }
 
-    async validate(accessToken: string, refreshToken: string, profile: any, done: VerifyCallBack): Promise<any>{
-        const user: UserDTO = new UserDTO();
-        user.firstName = profile.name.givenName;
-        user.lastName = profile.name.familyName;
-        user.picture = profile.photos[0].value;
+    // async validate(accessToken: string, refreshToken: string, profile: any, done: VerifyCallBack): Promise<any>{
+    //     const user: UserDTO = new UserDTO();
+    //     user.firstName = profile.name.givenName;
+    //     user.lastName = profile.name.familyName;
+    //     user.picture = profile.photos[0].value;
         
-        done(null, user);
-    }
+    //     done(null, user);
+    // }
 }

@@ -1,3 +1,4 @@
+import { AuthenticationUser } from '@graduates/api/authentication/api/shared/interfaces/data-access';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -23,13 +24,39 @@ export class UsersService {
   findAll(){
     return this.users;
   }
-  findEverything(){
-      return this.users;
+  
+
+  findOne(username: string){
+    return this.users.find((users) => users.name ===username);
   }
 
-  findOne(name: string){
-    return this.users.find((user) => user.name ===name);
+  FindIt(name: string){
+    return this.users.find(t=>t.name === name)
+    
   }
+
+//   async validateUser(name: string, password: string): Promise<any> {
+//     const user = await this.usersService.findOne(name);
+
+//     if (user && user.password === password){
+//         const {password, ...result } =user;         //result contains the user object without the password
+//         return result;
+//     }
+//     return null;
+// }
+
+
+async validateLogin(name: string, password: string): Promise<any> {
+
+  const user = this.findOne(name);;
+      if(name==name){
+        // const {password, ...result } =user;         //result contains the user object without the password
+        return user;
+      }
+
+
+  // const user = await this.findOne(name);
+}
 
     
 }

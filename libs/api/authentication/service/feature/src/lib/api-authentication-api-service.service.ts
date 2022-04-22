@@ -59,8 +59,7 @@ export class AuthService {
     }   
 
     async validateUser(name: string, password: string): Promise<any> {
-      const user = await this.usersService.findOne(name);
-
+      const user = await this.usersService.FindIt(name);
 
       if (user && user.password === password){
           const {password, ...result } =user;         //result contains the user object without the password
@@ -70,16 +69,21 @@ export class AuthService {
   }
 
   async login(user: AuthenticationUser){
+      
+    return {
+        access_token: this.jwtService.sign({name:user.name, sub:user.id}),
+        user,
+    }
+}
 
-    const resp = new LoginResponse();
-    resp.access_token = this.jwtService.sign({name:user.name, sub:user.id});
-    resp.user = user;
-    return resp;
-      /*return {
-          access_token: this.jwtService.sign({name:user.name, sub:user.id}),
-          user,
-      }*/
+async signup(loginUserInput: LoginUserInput){
+  const user = await this.usersService.findOne(loginUserInput.name)
+  if (user) {
+    throw new Error('User exists');
   }
+
+  return user;
+}
 
 
 }

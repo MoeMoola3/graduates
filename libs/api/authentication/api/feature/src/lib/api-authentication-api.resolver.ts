@@ -16,14 +16,13 @@ export class ApiAuthenticationResolver{
         return this.usersService.findAll();
     }
 
-  /*Local Strategy
+  //Local Strategy
   @Mutation(() => LoginResponse)
-  @UseGuards(GqlAuthGuard)
-  login(@Args('username') username: ) {
-      return this.apiauthenticationService.login(context.user);
-  }*/
+    @UseGuards(GqlAuthGuard)
+    login(@Args('loginUserInput') loginUserInput: LoginUserInput, @Context() context) {
+        return this.apiauthenticationService.login(context.user);
+    }
 
- // @Mutation(()=>)
 
   //JWT Strategy
   @Query(() => [AuthenticationUser], { name: 'jwtusers' })
@@ -33,22 +32,43 @@ export class ApiAuthenticationResolver{
   }
 
 
-  @Query(() => AuthenticationUser, { name: 'user' })
+  @Query(() => AuthenticationUser, { name: 'users' })
   findOne(@Args('name') name: string) {
     return this.usersService.findOne(name);
   }
 
-  @Mutation(() => LoginResponse)
-  login(@Args('username') username: string, @Args('password') password: string) {
 
-      const user = new AuthenticationUser();
-      user.email = username;
-      user.password = password;
-      user.id  ="1";
-      user.name = "testUser";
 
-      return this.apiauthenticationService.login(user);
+  @Mutation(() => AuthenticationUser)
+  signup(@Args('loginUserInput') loginUserInput: LoginUserInput){
+    return this.apiauthenticationService.signup(loginUserInput);
   }
+
+  // @Mutation(() => LoginResponse)
+  // login(@Args('username') username: string, @Args('password') password: string) {
+
+  //   if(username == this.usersService.findOne(username))
+
+  //     const user = new AuthenticationUser();
+  //     user.email = username;
+  //     user.password = password;
+  //     user.id  ="1";
+  //     user.name = "testUser";
+
+  //     return this.apiauthenticationService.login(user);
+  // }
+
+
+  // @Mutation(() => LoginResponse)
+  // login(@Args('username') username: string, @Args('password') password: string) {
+
+  //     return this.usersService.FindIt(username);
+  // }
+
+
+
+
+
 
     @Query(() =>String) 
     pingAuthentication(){
